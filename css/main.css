@@ -1,0 +1,746 @@
+/* 전역 스타일 */
+body {
+    margin: 0;
+    /*font-family: 'Roboto', sans-serif;*/
+    background: #0f0f0f; /* 어두운 배경 */
+    color: #e0e0e0; /* 기본 텍스트 색상 */
+    overflow-x: hidden; /* 수평 스크롤만 숨김 */
+}
+
+/* 사이드바 */
+.sidebar {
+    transform: translateX(-100%); /* 사이드바가 처음엔 왼쪽으로 숨겨져 있음 */
+    transition: transform 0.3s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background: linear-gradient(180deg, #111, #222);
+    box-shadow: 2px 0 15px rgba(0, 255, 255, 0.5);
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    border-right: 2px solid transparent;
+    color: #fff; /* 글씨 색상 */
+}
+
+.sidebar.active {
+    transform: translateX(0);
+}
+/* 네온 효과 애니메이션 */
+@keyframes neonGlow {
+    0% {
+        border-color: #0ff;
+        box-shadow: 0 0 10px #0ff;
+    }
+    50% {
+        border-color: #f0f;
+        box-shadow: 0 0 20px #f0f;
+    }
+    100% {
+        border-color: #ff0;
+        box-shadow: 0 0 10px #ff0;
+    }
+}
+
+/* 메뉴 항목 스타일 */
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 50px;
+}
+
+.sidebar ul li {
+    margin: 15px 0;
+}
+
+.sidebar ul li a {
+    display: flex;
+    align-items: center;
+    color: #0ff;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.sidebar ul li a.active,
+.sidebar ul li a:hover {
+    background: linear-gradient(90deg, #0ff, #f0f);
+    color: black;
+    box-shadow:
+        0 0 15px #0ff,
+        0 0 25px #f0f;
+}
+
+/* 햄버거 버튼 */
+#menuBtn {
+    position: fixed;
+    top: 20px; /* 화면 상단에서 20px 만큼 떨어진 위치 */
+    left: 20px; /* 화면 오른쪽에서 20px 만큼 떨어진 위치 */
+    font-size: 30px;
+    color: #0ff;
+    cursor: pointer;
+    z-index: 1100; /* 다른 요소들보다 앞에 보이도록 설정 */
+    transition: color 0.3s ease-in-out;
+}
+
+#menuBtn:hover {
+    color: #f0f; /* 호버시 색상 변경 */
+}
+
+/* 반응형: 작은 화면에서 사이드바 */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+}
+
+/* 섹션 스타일 */
+.container {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    height: 100vh;
+}
+
+.container > div {
+    position: relative;
+    scroll-snap-align: start;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.5s ease-in-out;
+}
+
+.container > div:nth-child(odd) {
+    background: #111;
+}
+
+.container > div:nth-child(even) {
+    background: #222;
+}
+
+.mainTitle h1 {
+    font-size: 10rem;
+    font-weight: bold;
+    color: #a3fafa;
+
+    text-shadow:
+        0 0 15px #0ff,
+        0 0 30px #0ff,
+        0 0 45px #0ff;
+    z-index: 2;
+    margin-bottom: 30px;
+}
+
+.logo h1 {
+    font-size: 3em;
+    margin-bottom: 40px;
+    color: #00ffcc;
+    text-shadow:
+        0 0 10px #00ffcc,
+        0 0 20px #00ffcc;
+}
+
+.logo h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #a3fafa;
+    text-shadow:
+        0 0 15px #0ff,
+        0 0 30px #0ff;
+    margin-bottom: 30px;
+}
+
+.mainTitle {
+    font-family: "Do Hyeon", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+#section1 {
+    position: relative;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.subTitle h3 {
+    margin: 10px 0 0;
+    font-size: 3em;
+    text-shadow:
+        0 0 10px #f0f,
+        0 0 20px #f0f;
+}
+
+.floating-messages {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* 박스가 클릭 이벤트를 차단하지 않도록 설정 */
+    z-index: 0;
+}
+
+.floating-message {
+    position: absolute;
+    background-color: no;
+    color: #11ff00;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: 1px solid #11ff00;
+    /*box-shadow: 0 0 10px rgba(0, 255, 0, 0.8);*/
+    animation: floatMessage 3s ease-in-out forwards;
+    opacity: 0;
+}
+
+/* 메시지 애니메이션 */
+@keyframes floatMessage {
+    0% {
+        transform: scale(0.5) translateY(100px);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1) translateY(-10px);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.5) translateY(-100px);
+        opacity: 0;
+    }
+}
+
+#section2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 20px;
+    background: #111;
+    color: rgba(224, 224, 224, 0.41);
+    position: relative;
+    perspective: 1000px; /* 3D 공간 효과 */
+}
+
+.popol .logo {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.logo h1 {
+    font-size: 3em;
+    margin-bottom: 40px;
+    color: #00ffcc;
+    text-shadow:
+        0 0 10px #00ffcc,
+        0 0 20px #00ffcc;
+}
+
+.profilePhoto img {
+    width: 500px; /* 사진 크기 조정 */
+    height: 500px;
+    border-radius: 50%; /* 원형 이미지 */
+    border: 5px solid #0ff;
+    box-shadow:
+        0 0 20px #0ff,
+        0 0 40px #0ff; /* 그림자 효과 */
+    margin-bottom: 20px;
+    z-index: 2;
+    object-fit: cover;
+    transition: transform 0.2s ease-in-out;
+    transform-style: preserve-3d;
+}
+
+.profileIndex {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 800px;
+    width: 100%;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #0ff;
+    box-shadow: 0 0 15px #0ff;
+    border-radius: 10px;
+    z-index: 2;
+}
+
+.profileIndex div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: rgba(20, 20, 20, 0.9);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+    transition: all 0.3s ease-in-out;
+}
+
+.profileIndex div:hover {
+    transform: rotate(3deg) scale(1.1) translateY(-5px); /* 회전 + 확대 + 위로 살짝 올라가는 효과 */
+    /*background: linear-gradient(45deg, rgba(255, 0, 255, 0.7), rgba(0, 255, 255, 0.7));  그라데이션 효과 */
+    color: #fff; /* 텍스트 색상 변경 */
+    text-shadow:
+        0 0 15px #ff00ff,
+        0 0 30px #ff00ff,
+        0 0 60px #ff00ff;
+    box-shadow:
+        0 0 20px rgba(0, 255, 255, 0.9),
+        0 0 40px rgba(0, 255, 255, 0.6); /* 추가적인 네온 효과 */
+    animation: glitch 1.2s infinite; /* 글리치 효과 */
+    transition: all 0.5s ease-in-out;
+}
+
+/* 글리치 애니메이션 */
+@keyframes glitch {
+    0% {
+        text-shadow:
+            2px 2px 4px rgba(0, 255, 255, 0.6),
+            -2px -2px 4px rgba(255, 0, 255, 0.6);
+    }
+    20% {
+        text-shadow:
+            -4px 4px 8px rgba(0, 255, 255, 0.6),
+            4px -4px 8px rgba(255, 0, 255, 0.6);
+    }
+    40% {
+        text-shadow:
+            4px -4px 8px rgba(0, 255, 255, 0.6),
+            -4px 4px 8px rgba(255, 0, 255, 0.6);
+    }
+    60% {
+        text-shadow:
+            -2px 2px 4px rgba(0, 255, 255, 0.6),
+            2px -2px 4px rgba(255, 0, 255, 0.6);
+    }
+    80% {
+        text-shadow:
+            2px -2px 4px rgba(0, 255, 255, 0.6),
+            -2px 2px 4px rgba(255, 0, 255, 0.6);
+    }
+    100% {
+        text-shadow:
+            2px 2px 4px rgba(0, 255, 255, 0.6),
+            -2px -2px 4px rgba(255, 0, 255, 0.6);
+    }
+}
+
+.profileIndex div:last-child {
+    border-bottom: none; /* 마지막 행 구분선 제거 */
+}
+
+/* 텍스트 스타일 */
+.profileIndex p {
+    margin: 0;
+    font-size: 1.2rem;
+    font-family: "Gasoek One", sans-serif;
+    color: #82ffff;
+}
+
+.profileIndex p:last-child {
+    font-weight: bold;
+    color: #f770f7;
+    text-align: right;
+}
+
+.tech {
+    padding: 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.techlist-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.techlist {
+    background: #222;
+    padding: 20px;
+    border-radius: 15px;
+    width: 250px;
+    height: 350px;
+    text-align: center;
+    cursor: pointer;
+    transition:
+        transform 0.3s,
+        box-shadow 0.3s;
+    position: relative;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+    transform: scale(1);
+    overflow: hidden;
+    transform-style: preserve-3d;
+}
+
+/* 선택된 기술 카드 강조 효과 */
+.techlist.selected {
+    background: #333;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 1);
+}
+
+.techlist.selected .techPhoto img {
+    transform: rotate(15deg) scale(1.2);
+}
+
+/* 캐릭터 셀렉트 효과 */
+.techlist:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 1);
+}
+
+.techPhoto img {
+    width: 80%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.techInfo h2 {
+    font-size: 1.5em;
+    margin: 10px 0;
+    color: #00ffcc;
+}
+
+.techInfo h3 {
+    font-size: 1em;
+    color: #999;
+}
+
+.popol {
+    position: relative;
+    background-color: #121212;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 20px;
+    text-align: center;
+}
+
+.popol .logo h1,
+.popol .logo h2 {
+    font-family: "Do Hyeon", sans-serif;
+    text-align: center;
+    color: #ff00b3; /* 네온 분홍 */
+    text-shadow:
+        0 0 10px #ff00b3,
+        0 0 30px #ff00b3;
+}
+
+.popol .logo h2 {
+    color: #ff6600; /* 네온 오렌지 */
+    text-shadow:
+        0 0 10px #ff6600,
+        0 0 30px #ff6600;
+}
+
+.portfolio-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1200px; /* 3D 회전 효과를 위한 원근감 설정 */
+    width: 100%;
+    height: 70%;
+}
+
+.portfolio-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d; /* 3D 변형을 위한 설정 */
+    transform: rotateY(0deg); /* 초기 회전 각도 */
+    transition: transform 1s ease-in-out; /* 부드러운 회전 애니메이션 */
+}
+
+/* 포트폴리오 아이템 회전 효과 */
+.portfolio-container:hover {
+    transform: rotateY(360deg); /* 마우스를 올리면 전체 회전 */
+}
+
+.portfolio-item:nth-child(1) {
+    transform: rotateY(0deg) translateZ(400px); /* 첫 번째 이미지 */
+}
+.portfolio-item:nth-child(2) {
+    transform: rotateY(90deg) translateZ(400px); /* 두 번째 이미지 */
+}
+.portfolio-item:nth-child(3) {
+    transform: rotateY(180deg) translateZ(400px); /* 세 번째 이미지 */
+}
+.portfolio-item:nth-child(4) {
+    transform: rotateY(270deg) translateZ(400px); /* 네 번째 이미지 */
+}
+
+.portfolio-item {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    margin: 0 30px;
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 0 15px rgba(255, 102, 0, 0.8);
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
+    cursor: pointer;
+}
+
+.portfolio-item:hover {
+    transform: rotateY(360deg) translateZ(600px); /* 회전 애니메이션 */
+    box-shadow: 0 0 20px rgba(255, 0, 255, 1), 0 0 40px rgba(0, 255, 255, 1); /* 네온 효과 강화 */
+}
+
+/* 포트폴리오 아이템의 다른 각도 */
+.portfolio-item:nth-child(1) {
+    transform: rotateY(0deg) translateZ(600px);
+}
+
+.portfolio-item:nth-child(2) {
+    transform: rotateY(90deg) translateZ(600px);
+}
+
+.portfolio-item:nth-child(3) {
+    transform: rotateY(180deg) translateZ(600px);
+}
+
+.portfolio-item:nth-child(4) {
+    transform: rotateY(270deg) translateZ(600px);
+}
+
+/* 포트폴리오를 클릭했을 때 회전 */
+.portfolio-item.clicked {
+    transform: rotateY(180deg) translateZ(600px);
+}
+
+/* 연락하기 섹션 */
+.contact {
+    background: #1e1e1e; /* 어두운 회색 배경 */
+    color: #fff; /* 기본 텍스트 색상 */
+    padding: 50px;
+    text-align: center;
+    position: relative;
+    display: flex;
+    flex-direction: column; /* 세로 정렬 */
+    align-items: center; /* 가로 중앙 정렬 */
+    justify-content: center; /* 세로 중앙 정렬 */
+    height: 100vh; /* 화면을 꽉 채우게 */
+}
+
+/* 로고 스타일 */
+.contact .logo h1 {
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 4rem;
+    color: #9b00ff; /* 네온 보라색 */
+    text-shadow: 0 0 10px #9b00ff, 0 0 20px #9b00ff, 0 0 30px #9b00ff;
+    margin-bottom: 20px; /* 아래쪽 여백 */
+}
+
+.contact .logo h2 {
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 1.8rem;
+    color: #00b8d4; /* 네온 청록색 */
+    text-shadow: 0 0 5px #00b8d4, 0 0 10px #00b8d4;
+    margin-bottom: 30px; /* 아래쪽 여백 */
+}
+
+/* 연락처 폼 */
+.contactForm {
+    display: flex;
+    flex-direction: column; /* 세로 정렬 */
+    gap: 20px;
+    max-width: 500px;
+    width: 100%;
+}
+
+/* 레이블 스타일 */
+.contactForm label {
+    font-size: 1.2rem;
+    color: #ff3d00; /* 네온 레드 */
+    text-shadow: 0 0 5px #ff3d00, 0 0 10px #ff3d00;
+}
+
+/* 입력 필드 */
+.contactForm input,
+.contactForm textarea {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    background: #262626; /* 어두운 회색 배경 */
+    border: 2px solid #00b8d4; /* 네온 청록색 테두리 */
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1rem;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.contactForm input:focus,
+.contactForm textarea:focus {
+    border-color: #ff3d00; /* 네온 레드 포커스 효과 */
+    outline: none;
+}
+
+/* 버튼 스타일 */
+.contactForm button {
+    background: linear-gradient(45deg, #9b00ff, #00b8d4); /* 보라색과 청록색 그라데이션 */
+    color: #fff;
+    font-size: 1.5rem;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 15px rgba(155, 0, 255, 0.8); /* 네온 보라색 그림자 */
+}
+
+/* 버튼 호버 효과 */
+.contactForm button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(255, 61, 0, 0.8), 0 0 40px rgba(0, 184, 212, 0.8); /* 호버 시 더 강렬한 네온 효과 */
+}
+
+/* 텍스트 영역 */
+.contactForm textarea {
+    height: 150px;
+    resize: none;
+}
+
+/* 포커스 효과와 인터랙션 */
+.contactForm input,
+.contactForm textarea {
+    transition: all 0.3s ease;
+}
+
+.contactForm input:focus, 
+.contactForm textarea:focus {
+    box-shadow: 0 0 10px rgba(0, 184, 212, 0.8); /* 네온 청록색 포커스 */
+}
+
+/* 화면 전체를 덮는 네온 빛 효과 (뒤 배경에 넣기) */
+.contact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 184, 212, 0.1); /* 청록색으로 배경 */
+    z-index: -1;
+    filter: blur(5px);
+    animation: pulse 2s infinite alternate;
+}
+
+/* 네온 불빛 효과 */
+@keyframes pulse {
+    0% {
+        opacity: 0.2;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+
+
+.fake-profile-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.fake-profile {
+    position: absolute;
+    width: 100%;
+    height: 30px;
+    color: #00ff99; /* 네온 그린 텍스트 */
+    font-family: 'Courier New', monospace;
+    font-size: 20px;
+    text-shadow: 0 0 10px #00ff99, 0 0 20px #00ff99, 0 0 30px #00ff99;
+    opacity: 0;
+    white-space: nowrap;
+    will-change: transform, opacity;
+    animation: matrixFall 5s linear infinite;
+}
+
+/* 애니메이션: 매트릭스처럼 수직으로 흘러내리는 효과 */
+@keyframes matrixFall {
+    0% {
+        transform: translateY(-100vh); /* 화면 상단에서 시작 */
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(50vh); /* 화면 중간에 도달 */
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh); /* 화면 하단으로 내려가며 사라짐 */
+        opacity: 0;
+    }
+}
+
+.fake-profile .profile-info {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.fake-profile .profile-name {
+    font-weight: bold;
+}
+
+.fake-profile .profile-job {
+    font-size: 16px;
+    color: #bbbbbb; /* 연한 회색 */
+}
+
+.fake-profile .profile-bio {
+    font-size: 14px;
+    color: #ccc;
+}
+
+/* 배경 스타일 */
+.typing-background {
+    background-color: #1e1e1e; /* 어두운 배경 */
+    padding: 50px;
+    width: 100%;
+    height: 100vh; /* 화면 전체 높이 */
+    position: relative;
+    overflow: hidden; /* 텍스트가 화면 밖으로 나가지 않도록 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="kr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>김도연의 자기소개 페이지</title>
+        <link rel="stylesheet" href="/css/main.css" />
+        <script src="/source/main.js" defer></script>
+        <script src="https://kit.fontawesome.com/567f0760c2.js" crossorigin="anonymous"></script>
+
+        <!-- 알림으로 브라우저 및 해상도 공지 -->
+        <script type="text/javascript">
+            alert("본 페이지는 크롬 브라우저 및 1920px 해상도에 최적화 되어 있습니다.");
+        </script>
+    </head>
+    <body>
+        <i class="fa-solid fa-bars" id="menuBtn"></i>
+
+        <nav class="sidebar" id="sidebar">
+            <ul>
+                <li>
+                    <a href="#section1" class="active"><i class="fa-solid fa-house"></i> HOME</a>
+                </li>
+                <li>
+                    <a href="#section2"><i class="fa-solid fa-user"></i> 프로필</a>
+                </li>
+                <li>
+                    <a href="#section3"><i class="fa-solid fa-tools"></i> 사용 기술</a>
+                </li>
+                <li>
+                    <a href="#section4"><i class="fa-solid fa-briefcase"></i> 포트폴리오</a>
+                </li>
+                <li>
+                    <a href="#section5"><i class="fa-solid fa-envelope"></i> 연락처</a>
+                </li>
+            </ul>
+        </nav>
+
+        <section class="wrap">
+            <div class="container">
+                <div class="main" id="section1">
+                    <div class="mainTitle">
+                        <h1>안녕하세요! 김도연 입니다!</h1>
+                    </div>
+                    <div class="subTitle">
+                        <h3>웹 퍼블리셔를 꿈꾸고 있는 꿈 많은 사회새내기입니다</h3>
+                    </div>
+                    <div class="floating-messages"></div>
+                </div>
+
+                <div class="profile" id="section2">
+                    <div class="logo">
+                        <h1>프로필</h1>
+                    </div>
+                    <div class="profilePhoto">
+                        <img src="/source/%EB%82%B4%EC%82%AC%EC%A7%84.jpg" />
+                    </div>
+                    <div class="profileIndex">
+                        <div>
+                            <p>이름</p>
+                            <p>김도연</p>
+                        </div>
+                        <div>
+                            <p>거주지</p>
+                            <p>경기도 부천</p>
+                        </div>
+                        <div>
+                            <p>생년월일</p>
+                            <p>1995.02.23</p>
+                        </div>
+                        <div>
+                            <p>취미</p>
+                            <p>미니어처</p>
+                        </div>
+                    </div>
+                    <div class="fake-profile-container">
+                        <!-- 가짜 프로필들이 여기서 동적으로 생성됩니다 -->
+                    </div>
+                </div>
+
+                <div class="tech" id="section3">
+                    <div class="logo">
+                        <h1>사용 기술</h1>
+                    </div>
+                    <div class="techlist-container">
+                        <div class="techlist" id="tech1">
+                            <div class="techPhoto"><img src="/source/html5.png" /></div>
+                            <div class="techInfo">
+                                <h2>HTML</h2>
+                                <h3>웹 퍼블리싱의 기본기, 계속 공부 중</h3>
+                            </div>
+                        </div>
+                        <div class="techlist" id="tech2">
+                            <div class="techPhoto"><img src="/source/css.png" /></div>
+                            <div class="techInfo">
+                                <h2>CSS</h2>
+                                <h3>웹 퍼블리싱의 기본기, 계속 공부 중</h3>
+                            </div>
+                        </div>
+                        <div class="techlist" id="tech3">
+                            <div class="techPhoto"><img src="/source/js.png" /></div>
+                            <div class="techInfo">
+                                <h2>JavaScript</h2>
+                                <h3>웹 퍼블리싱의 기본기, 계속 공부 중</h3>
+                            </div>
+                        </div>
+                        <div class="techlist" id="tech4">
+                            <div class="techPhoto"><img src="/source/ph.png" /></div>
+                            <div class="techInfo">
+                                <h2>포토샵</h2>
+                                <h3>GTQ1급 자격증 보유, 실무 경험 있음</h3>
+                            </div>
+                        </div>
+                        <div class="techlist" id="tech5">
+                            <div class="techPhoto"><img src="/source/video.png" /></div>
+                            <div class="techInfo">
+                                <h2>프리미어 프로 & 에프터 이펙트</h2>
+                                <h3>직업 교육을 통해 습득</h3>
+                            </div>
+                        </div>
+                        <div class="techlist" id="tech6">
+                            <div class="techPhoto"><img src="/source/news.png" /></div>
+                            <div class="techInfo">
+                                <h2>문서 작업</h2>
+                                <h3>다양한 글 작성 경험 있음</h3>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="popol" id="section4">
+                    <div class="logo">
+                        <h1>포트폴리오</h1>
+                        <h2>누르면 회전합니다</h2>
+                    </div>
+                    <div class="portfolio-wrapper">
+                        <div class="portfolio-container">
+                            <div class="portfolio-item" data-index="0">
+                                <img src="/source/ready.png" alt="포트폴리오 1" />
+                            </div>
+                            <div class="portfolio-item" data-index="1">
+                                <img src="/source/ready.png" alt="포트폴리오 2" />
+                            </div>
+                            <div class="portfolio-item" data-index="2">
+                                <img src="/source/ready.png" alt="포트폴리오 3" />
+                            </div>
+                            <div class="portfolio-item" data-index="3">
+                                <img src="/source/ready.png" alt="포트폴리오 4" />
+                            </div>
+                            <!-- 더 많은 이미지를 추가할 수 있습니다 -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact" id="section5">
+                    <div class="logo">
+                        <h1>연락주세요!</h1>
+                    </div>
+                    <form class="contactForm">
+                        <label>연락 주시는 분</label>
+                        <input type="text" required />
+                        <label>보내시는 분 이메일 주소</label>
+                        <input type="email" required />
+                        <label>내용</label>
+                        <textarea required></textarea>
+                        <button type="submit">보내기</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
